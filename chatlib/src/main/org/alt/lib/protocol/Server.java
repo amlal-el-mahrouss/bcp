@@ -1,4 +1,4 @@
-package org.alt.lib.socket.serverside;
+package org.alt.lib.protocol;
 
 
 import org.alt.lib.protocol.Port;
@@ -23,6 +23,7 @@ public class Server {
         this.port = port;
         this.self = serverSocket;
     }
+
 
     public String AddClient(User client)
     {
@@ -51,6 +52,15 @@ public class Server {
         for (User client : clients)
         {
             client.SendMessage(channel + message, new DataOutputStream(client.ClientID().getOutputStream()));
+        }
+    }
+
+    public void SendPrivateMessage(String message, User client) throws IOException
+    {
+        try {
+            client.SendMessage(message, new DataOutputStream(client.ClientID().getOutputStream()));
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 
