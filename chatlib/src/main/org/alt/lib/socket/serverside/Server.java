@@ -63,13 +63,12 @@ public class Server {
         self = new ServerSocket();
         self.bind(infos);
         self.accept();
+    }
 
-        while (self.isBound())
-        {
-            Socket user = self.accept();
-            User client = new User(user);
-            clients.add(client);
-        }
-
+    public void AddUser(Socket user) throws IOException
+    {
+        user = self.accept();
+        User client = new User(user);
+        clients.add(client);
     }
 }
