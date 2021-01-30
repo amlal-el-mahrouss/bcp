@@ -1,6 +1,7 @@
 package org.alt.lib.protocol;
 
-public class Port {
+public class Port
+{
 
     String port;
 

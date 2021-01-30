@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class User {
+public class User
+{
 
     Socket client;
     InetAddress address;
@@ -24,6 +25,9 @@ public class User {
         this.username = username;
     }
 
+    /*
+    * connect the clients to a bcp server
+    * */
     public void Connect(String ip_address, Port port)
     {
         assert port.IsValid();

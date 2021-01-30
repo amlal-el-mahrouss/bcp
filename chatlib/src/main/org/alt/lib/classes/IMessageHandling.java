@@ -13,7 +13,8 @@ package org.alt.lib.classes;
 * ServerBroadcast
 */
 
-public interface IMessageHandling {
+public interface IMessageHandling
+{
     EStates OnMessageSend();
     EStates OnMessage();
     EStates ServerBroadcast();
