@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +22,8 @@ public class Server
 
     ServerSocket self;
     Port port;
-    Set<User> clients = new HashSet<>();
+    HashSet<User> clients = new HashSet<>();
+    HashMap<User, String> usernames = new HashMap();
 
     Server(Port port)
     {
@@ -34,22 +36,20 @@ public class Server
         this.self = serverSocket;
     }
 
-    public String AddClient(Socket user)
+    public String AddClient(Socket user, String username)
     {
-        try {
-            user = self.accept();
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
         User client = new User(user);
 
         clients.add(client);
+        usernames.put(client, username);
+
         return client.Username() + " Connected!";
     }
 
     public String RemoveClient(User client)
     {
         clients.remove(client);
+        usernames.remove(client);
         return client.Username() + " Disconnected!";
     }
 
@@ -103,6 +103,18 @@ public class Server
         assert port.IsValid();
 
         InetSocketAddress infos = new InetSocketAddress(port.Convert());
+
+        self = new ServerSocket();
+        self.bind(infos);
+        self.accept();
+    }
+
+    public void AcceptConnections(String domain) throws IOException
+    {
+        assert port.IsValid();
+        assert domain.isEmpty();
+
+        InetSocketAddress infos = new InetSocketAddress(domain, port.Convert());
 
         self = new ServerSocket();
         self.bind(infos);

@@ -17,7 +17,7 @@ import org.alt.lib.protocol.User;
 
 public interface IMessageHandling
 {
-    EStates OnMessageSend(User user);
+    EStates OnMessageSend(User user, String message);
     String OnMessage(User user);
     EStates OnServerBroadcast(User user);
 }
