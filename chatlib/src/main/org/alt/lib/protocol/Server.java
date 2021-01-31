@@ -89,7 +89,7 @@ public class Server
         }
     }
 
-    public void SendPrivateMessage(String message, User client) throws IOException
+    public void SendPrivateMessage(String message, User client)
     {
         try {
             client.SendMessage("Private message from " + client.username + ": " + message, new DataOutputStream(client.ClientID().getOutputStream()));
