@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="bcp:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/bcp_jar</output-path>
+    <root id="archive" name="bcp.jar">
+      <element id="module-output" name="bcp" />
+    </root>
+  </artifact>
+</component>

@@ -13,6 +13,7 @@ public class User
     InetAddress address;
     String username;
 
+    public User() {}
     public User(Socket client)
     {
         this.client = client;
@@ -32,10 +33,13 @@ public class User
     {
         assert port.IsValid();
 
-        try {
-            client = new Socket(ip_address, port.Convert());
-        } catch (IOException exception) {
-            exception.printStackTrace();
+        if (client == null)
+        {
+            try {
+                client = new Socket(ip_address, port.Convert());
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
         }
 
         address = client.getInetAddress();

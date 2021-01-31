@@ -13,9 +13,11 @@ package org.alt.lib.classes;
 * ServerBroadcast
 */
 
+import org.alt.lib.protocol.User;
+
 public interface IMessageHandling
 {
-    EStates OnMessageSend();
-    EStates OnMessage();
-    EStates ServerBroadcast();
+    EStates OnMessageSend(User user);
+    String OnMessage(User user);
+    EStates OnServerBroadcast(User user);
 }
