@@ -21,7 +21,7 @@ public class User
 
     public void NewUsername(String username)
     {
-        assert username.isEmpty();
+        assert !username.isEmpty();
 
         this.username = username;
     }
@@ -29,14 +29,12 @@ public class User
     /*
     * connect the clients to a bcp server
     * */
-    public void Connect(String ip_address, Port port)
+    public void Connect(String ip_address, Integer port)
     {
-        assert port.IsValid();
-
         if (client == null)
         {
             try {
-                client = new Socket(ip_address, port.Convert());
+                client = new Socket(ip_address, port);
             } catch (IOException exception) {
                 exception.printStackTrace();
             }

@@ -11,26 +11,24 @@ import java.util.Set;
 
 /*
 * The Server class
-* HANDLES
-* everything related to the server
+* handles everything related to the server
 * it is used by the server
 * but it is included in the client application if you want to host a server
 * */
 
 public class Server
 {
-
     ServerSocket self;
-    Port port;
+    Integer port;
     HashSet<User> clients = new HashSet<>();
-    HashMap<User, String> usernames = new HashMap();
+    HashMap<User, String> usernames = new HashMap<>();
 
-    Server(Port port)
+    Server(Integer port)
     {
         this.port = port;
     }
 
-    Server(Port port, ServerSocket serverSocket)
+    Server(Integer port, ServerSocket serverSocket)
     {
         this.port = port;
         this.self = serverSocket;
@@ -74,7 +72,7 @@ public class Server
     public void SendChannelMessage(User sender, String channel, String message, Set<User> clients)
     {
         assert channel != null;
-        assert message != null;
+        assert !message.isEmpty();
 
         for (User client : clients)
         {
@@ -100,21 +98,27 @@ public class Server
 
     public void AcceptConnections() throws IOException
     {
-        assert port.IsValid();
-
-        InetSocketAddress infos = new InetSocketAddress(port.Convert());
+        InetSocketAddress infos = new InetSocketAddress(port);
 
         self = new ServerSocket();
         self.bind(infos);
         self.accept();
     }
 
-    public void AcceptConnections(String domain) throws IOException
+    public void AcceptConnections(Integer port) throws IOException
     {
-        assert port.IsValid();
-        assert domain.isEmpty();
+        InetSocketAddress infos = new InetSocketAddress(port);
 
-        InetSocketAddress infos = new InetSocketAddress(domain, port.Convert());
+        self = new ServerSocket();
+        self.bind(infos);
+        self.accept();
+    }
+
+    public void AcceptConnections(Integer port, String domain) throws IOException
+    {
+        assert !domain.isEmpty();
+
+        InetSocketAddress infos = new InetSocketAddress(domain, port);
 
         self = new ServerSocket();
         self.bind(infos);

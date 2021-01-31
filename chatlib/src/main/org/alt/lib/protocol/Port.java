@@ -1,8 +1,10 @@
 package org.alt.lib.protocol;
-
+/*
+* Unused class
+* Deprecated
+* */
 public class Port
 {
-
     String port;
 
     Port(String port)
